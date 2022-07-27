@@ -12,7 +12,7 @@ color:#FFFFFF;
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
-  background-image: url(mw.png);
+  background-image: url(/mw.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -34,14 +34,14 @@ color:#FFFFFF;
 .content {
   width:80%;
   margin-left:7.5%;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.4);
   color:white;
   margin-top:1%;
   font-size:25px;
   text-align:center;
-  border-radius:30px;
-  padding:25px;
-  line-height:25px;
+  border-radius:20px;
+  padding:5px;
+  line-height:20px;
   position:absolute;bottom:0px;
  }
  .title {
@@ -201,7 +201,7 @@ window.applicationCache.onprogress=function(a){document.getElementById("progress
 window.applicationCache.oncached=function(e){document.getElementById("progress").innerHTML="Page Cached Successfully!!";setTimeout(function(){document.getElementById("progress").innerHTML="Reopen the Page !!"; }, 1500);localStorage.cachedG="yes";};
 </script>
 <meta charset="utf-8">
-<title>Karo Host Auto Exploit GoldHen V2.2.2 900fw</title>
+<title>Rock Host Auto Exploit GoldHen V2.2.2 900fw</title>
 <script>
 function loadBIN(){
  var req = new XMLHttpRequest();
@@ -235,19 +235,19 @@ window.progress.innerHTML= LoadedMSG
 }
 
 function goldhen222(){
-    progress.innerHTML="Goldhen 2.2.2 loading... please wait";
-    LoadedMSG="GoldHEN 2.2.2 Loaded";
+    progress.innerHTML="Goldhen 2.2.2 جاري التحميل انتظر من فضلك";
+    LoadedMSG="GoldHEN 2.2.2 تم التحميل";
     PLfile = "goldhen_2.2.2_900.bin";
     setTimeout(loadBIN,50);
 }
 </script>
 </head>
 <body onload="if(localStorage.cachedG=='yes')setTimeout(poc,50);" style='background-color:#1A1920'>
-<h1 style='text-shadow: 4px 4px 4px black;font-size:30px;text-align:center;text-shadow: 4px 4px 4px black;color:yellow;margin-top:1%;'>Karo Host Auto Exploit GoldHen V2.2.2 900fw</h1>
-<h1 id=progress style='font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:white;'>Jailbreaking....Please wait</h1>
+<h1 style='text-shadow: 4px 4px 4px black;font-size:30px;text-align:center;text-shadow: 4px 4px 4px black;color:yellow;margin-top:1%;'>Rock Host Auto Exploit GoldHen V2.2.2 900fw</h1>
+<h1 id=progress style='font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:white;'>جاري عمل الجلبريك.....انتظر من فضلك</h1>
 <div class="content" >
 <div class="text" >
- <br><span class="yellow" >Designed, Ported and Compiled by :</span >&nbsp;&nbsp; <span class="hue" >مركز روك للحاسبات</span>
+ <br><span class="yellow" >Designed, Ported and Compiled by :</span >&nbsp; <span class="hue" >مركز روك للحاسبات</span>
 </div>
 </div>
 <script>
@@ -921,12 +921,12 @@ function kernel() {
             chain.fcall(patch_buffer, p.read8(KERNEL_BASE_PTR));
             chain.fcall(window.syscalls[73], patch_buffer, 0x4000);
             chain.run();
-            alert("Jailbreak done. Remove USB Drive from PS4");
+            alert("تمت عملية الجلبريك بنجاح. استخرج الفلاش ثم اضغط موافق");
             setTimeout(jbdone, 50);
         }
         else
         {
-            alert("failed to trigger exploit kernel heap might be corrupted, try again or reboot the console");
+            alert("فشل في عمل الجلبريك اعد المحاولة او اعد تشغيل الجهاز ثم طبق الخطوات من جديد");
             p.write8(0, 0);
         }
  };

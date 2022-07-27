@@ -1,11 +1,11 @@
-CACHE MANIFEST 
+CACHE MANIFEST
 
-CACHE: 
+CACHE:
 index.html
 goldhen_2.2.2_900.bin
-mw.png
+/mw.png
 
-NETWORK: 
-* 
+NETWORK:
+*
 
 # Date: 2022-06-04T01:59:00Z:
