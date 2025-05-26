@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>PSFree-Lapse Exploit For 9.00</title>
+    <title>Exploit For 9.00 Without USB</title>
     <style>
       /* Global Styles */
       body {
@@ -12,7 +12,8 @@
         margin: 0;
         height: 100vh;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
         font-family: 'Arial', sans-serif;
         transition: background 0.5s ease;
@@ -40,12 +41,13 @@
         padding: 20px;
         background-color: rgba(0, 0, 0, 0.7);
         border-radius: 10px;
-        width: 800px;  /* عرض ثابت للخانة */
-        max-height: 60vh;  /* أقصى ارتفاع للخانة */
-        overflow-y: auto;  /* تمكين التمرير عموديًا */
+        width: 800px;  
+        max-height: 60vh;  
+        overflow-y: auto;  
         white-space: pre-wrap;
         word-wrap: break-word;
         animation: fadeIn 2s ease-out;
+        margin-top: 80px; /* Added margin to move the console down */
       }
 
       /* Info Box */
@@ -53,6 +55,7 @@
         font-size: 24px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         animation: slideUp 1.5s ease-out;
+        margin-top: 20px; /* Add some space after info box */
       }
 
       /* Title Animation */
@@ -62,6 +65,7 @@
         margin: 0;
         text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.8);
         letter-spacing: 2px;
+        margin-top: 30px; /* Add space between top of page and title */
       }
 
       /* Button Styles */
@@ -98,17 +102,14 @@
   </head>
 
   <body>
-    <div>
-      <h1>PSFree-Lapse Exploit For 9.00</h1>
+    <h1>PSFree-Lapse Exploit For 9.00</h1>
+    
+    <pre id="console">
+      <!-- SHOW -->
+    </pre>
 
-      <div class="info">
-        <p>Welcome to PSFree-Lapse. The best exploit for 9.00!</p>
-        <a href="https://example.com" class="btn">Learn More</a>
-      </div>
-
-      <pre id="console">
-        <!-- سيتم عرض محتوى السكربت هنا -->
-      </pre>
+    <div class="info">
+        <p>The best exploit for 9.00 Without USB</p>
     </div>
 
     <script>
