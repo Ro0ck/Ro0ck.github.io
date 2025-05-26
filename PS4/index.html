@@ -1,4 +1,4 @@
-<html manifest="Cache.manifest">
+<html>
   <head>
     <meta charset="utf-8">
     <title>Exploit For 9.00 Without USB</title>
@@ -112,7 +112,12 @@
         <p>The Exploit for 9.00 Without USB</p>
     </div>
 
-
+    <script>
+      // Ensure that the cache is being handled correctly
+      if (window.applicationCache.status == '0') {
+        window.location.replace("cache.html");
+      }
+    </script>
     <script src="payload.js"></script>
     <script type="module" src="./alert.mjs"></script>
   </body>
