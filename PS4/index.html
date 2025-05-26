@@ -10,7 +10,10 @@
         font-size: 22px;
         text-align: center;
         margin: 0;
-        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-family: 'Arial', sans-serif;
         transition: background 0.5s ease;
       }
@@ -21,7 +24,6 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        min-height: 100vh;
       }
 
       /* Custom Font */
@@ -33,14 +35,14 @@
       /* Console */
       #console {
         font-family: 'logging';
-        font-size: 20px;
+        font-size: 18px;
         color: #fff;
-        margin: 20px;
         padding: 20px;
         background-color: rgba(0, 0, 0, 0.7);
         border-radius: 10px;
-        max-width: 90%;
-        margin-top: 100px;
+        width: 800px;  /* عرض ثابت للخانة */
+        max-height: 60vh;  /* أقصى ارتفاع للخانة */
+        overflow-y: auto;  /* تمكين التمرير عموديًا */
         white-space: pre-wrap;
         word-wrap: break-word;
         animation: fadeIn 2s ease-out;
@@ -48,8 +50,6 @@
 
       /* Info Box */
       .info {
-        position: relative;
-        top: 39%;
         font-size: 24px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         animation: slideUp 1.5s ease-out;
@@ -98,13 +98,18 @@
   </head>
 
   <body>
-    <h1>PSFree-Lapse Exploit For 9.00</h1>
+    <div>
+      <h1>PSFree-Lapse Exploit For 9.00</h1>
 
-    <div class="info">
-      <p>Welcome to PSFree-Lapse. The best exploit for 9.00!</p>
+      <div class="info">
+        <p>Welcome to PSFree-Lapse. The best exploit for 9.00!</p>
+        <a href="https://example.com" class="btn">Learn More</a>
+      </div>
+
+      <pre id="console">
+        <!-- سيتم عرض محتوى السكربت هنا -->
+      </pre>
     </div>
-
-    <pre id="console"></pre>
 
     <script>
       // Ensure that the cache is being handled correctly
