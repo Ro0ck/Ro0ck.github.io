@@ -1,43 +1,118 @@
-<!-- Copyright (C) 2023-2025 anonymous
-
-This file is part of PSFree.
-
-PSFree is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
-
-PSFree is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
--->
-
 <html>
-    <head>
-        <meta charset='utf-8'>
-        <title>PSFree-Lapse Exploit For 9.00</title>
-        <style>
-            body{background: linear-gradient(to bottom right, #063FAB, #01258A);color:white;font-size:28px;text-align:center;margin:0;overflow:hidden;}
-            .info{position:relative;top:39%;}
-            @font-face {
-                font-family: 'logging';
-                src: url('fonts/LiberationMono-Regular.ttf');
-            }
-            #console {
-                font-family: 'logging';
-            }
-        </style>
-    </head>
-    <body style="background-image: url('icon0.png'); background-repeat: no-repeat; background-size: 100% 100%; background-position: center; min-height: 100vh;">
-      <script>
-       if (window.applicationCache.status=='0'){window.location.replace("cache.html");}
-      </script>
-        <pre id='console'></pre>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <title>PSFree-Lapse Exploit For 9.00</title>
+    <style>
+      /* Global Styles */
+      body {
+        background: linear-gradient(to bottom right, #063FAB, #01258A);
+        color: white;
+        font-size: 22px;
+        text-align: center;
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Arial', sans-serif;
+        transition: background 0.5s ease;
+      }
+
+      /* Background Image */
+      body {
+        background-image: url('icon0.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+      }
+
+      /* Custom Font */
+      @font-face {
+        font-family: 'logging';
+        src: url('fonts/LiberationMono-Regular.ttf');
+      }
+
+      /* Console */
+      #console {
+        font-family: 'logging';
+        font-size: 20px;
+        color: #fff;
+        margin: 20px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        max-width: 90%;
+        margin-top: 100px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        animation: fadeIn 2s ease-out;
+      }
+
+      /* Info Box */
+      .info {
+        position: relative;
+        top: 39%;
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        animation: slideUp 1.5s ease-out;
+      }
+
+      /* Title Animation */
+      h1 {
+        font-family: 'logging';
+        font-size: 36px;
+        margin: 0;
+        text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.8);
+        letter-spacing: 2px;
+      }
+
+      /* Button Styles */
+      .btn {
+        display: inline-block;
+        background-color: #0f4b8b;
+        color: white;
+        font-size: 18px;
+        padding: 10px 20px;
+        margin-top: 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:hover {
+        background-color: #014c80;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes slideUp {
+        0% { transform: translateY(100px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>PSFree-Lapse Exploit For 9.00</h1>
+
+    <div class="info">
+      <p>Welcome to PSFree-Lapse. The best exploit for 9.00!</p>
+    </div>
+
+    <pre id="console"></pre>
+
+    <script>
+      // Ensure that the cache is being handled correctly
+      if (window.applicationCache.status == '0') {
+        window.location.replace("cache.html");
+      }
+    </script>
     <script src="payload.js"></script>
-    <script type='module' src='./alert.mjs'></script>
+    <script type="module" src="./alert.mjs"></script>
+  </body>
 </html>
