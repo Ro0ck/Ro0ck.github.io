@@ -1,15 +1,313 @@
 <!DOCTYPE html>
 <html manifest="./PSFree.manifest">
-  <head>
-    <script>
-        function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));document.title="Installing offline cache: " + Percent + "%";}
-        function DisplayCacheProgress(){setTimeout(function(){;document.title="Cache Success !";},1000);setTimeout(function(){window.location.href = document.referrer;},3000);}window.applicationCache.addEventListener("progress",DLProgress,false);window.applicationCache.oncached=function(e){DisplayCacheProgress();};window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
-    </script>
-    <meta charset="UTF-8">
-    <title>PSFree | 9.00</title>
-    <link rel='stylesheet' href='./css/index.css'>
-  </head>
-  <body>
+<head>
+  <script>
+    function DLProgress(e) {
+      Percent = (Math.round(e.loaded / e.total * 100));
+      document.title = "Installing offline cache: " + Percent + "%";
+    }
+    function DisplayCacheProgress() {
+      setTimeout(function() { document.title = "Cache Success !"; }, 1000);
+      setTimeout(function() { window.location.href = document.referrer; }, 3000);
+    }
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+    window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+    window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+  </script>
+  <meta charset="UTF-8">
+  <title>PSFree | 9.00</title>
+  <style>
+    :root {
+  --primary: #ff3c00;   
+  --secondary: #b22222;        
+  --accent: #ffae00;          
+  --dark: #111111;             
+  --darker: #0b0b0b;           
+  --darkest: #000000;          /* True black */
+  --text: #f0f0f0;             /* Light grayish white text */
+  --text-muted: rgba(255, 255, 255, 0.5);  
+}
+
+    
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('bos.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+    
+    #container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .header-title {
+      font-size: 36px;
+      font-weight: bold;
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(0, 206, 201, 0.3);
+    }
+    
+    #PS4FW {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 8px;
+      margin: 20px auto;
+      max-width: 300px;
+      color: var(--accent);
+    }
+    
+    .floating-menu {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .menu-btn {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(162, 155, 254, 0.1));
+      border: 1px solid rgba(108, 92, 231, 0.3);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .menu-btn:hover {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.3), rgba(162, 155, 254, 0.2));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+    }
+    
+    .center-btn-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    
+    .ps-btn {
+      background: linear-gradient(135deg, rgba(0, 206, 201, 0.2), rgba(0, 184, 214, 0.2));
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 206, 201, 0.2);
+    }
+    
+    .ps-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 206, 201, 0.4);
+    }
+    
+    .ps-btn svg {
+      width: 60px;
+      height: 60px;
+      fill: var(--accent);
+    }
+    
+    .loader {
+      display: none;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .loader-circle {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Payloads Page */
+    #payloads-page {
+      display: none;
+      margin-top: 30px;
+    }
+    
+    .floating-menu-payloads {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .floating-menu-payloads button {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(108, 92, 231, 0.3);
+      border-radius: 8px;
+      padding: 8px 15px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .floating-menu-payloads button:hover {
+      background: rgba(108, 92, 231, 0.2);
+    }
+    
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .button-container button {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(108, 92, 231, 0.3);
+      border-radius: 6px;
+      padding: 10px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .button-container button:hover {
+      background: rgba(108, 92, 231, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    /* Debug Console */
+    #DebugConsole {
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    #DebugConsole h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    
+    .console {
+      background: var(--darkest);
+      border-radius: 6px;
+      padding: 15px;
+      font-family: monospace;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    #console {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    
+    /* Popups */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10;
+    }
+    
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--darker);
+      border: 1px solid var(--primary);
+      border-radius: 10px;
+      padding: 25px;
+      z-index: 11;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .popup h2 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    
+    .popup p {
+      margin: 10px 0;
+    }
+    
+    .close-btn {
+      background: var(--primary);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px;
+      color: white;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.2s ease;
+    }
+    
+    .close-btn:hover {
+      background: var(--secondary);
+    }
+    
+    label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    
+    input[type="radio"], input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .button-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .menu-btn, .floating-menu-payloads button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
     <!-- Floating Menu -->
     <div class="floating-menu">
       <button onclick="showpayloads()" class="menu-btn" id="payloadsbtn">Payloads</button>
@@ -23,7 +321,7 @@
       <div class="header-title" id="header-title">PSFree</div>
     </div>
 
-    <pre id="update-results" style="white-space: pre-wrap; margin-top: 10px;"></pre>
+    <pre id="update-results" style="white-space: pre-wrap; margin-top: 10px; display: none;"></pre>
 
     <h2 id="PS4FW">PS4 FW: 0.00 | Compatible</h2>
 
@@ -108,18 +406,16 @@
     
     <div id="DebugConsole">
       <h3>Debug Console</h3>
-    
-      <div class="console" style="padding: 20px;"><pre id='console'></pre></div>
+      <div class="console"><pre id='console'></pre></div>
     </div>
     
-
     <!-- About Popup -->
     <div class="overlay" id="overlay-popup"></div>
     <div class="popup" id="about-popup">
       <h2>About PSFree</h2>
       <p>Version: 1.5.0</p>
       <p>A simple web interface for PS4 jailbreak.</p>
-      <button  onclick="closeabout()" class="close-btn" id="close-about">Close</button>
+      <button onclick="closeabout()" class="close-btn" id="close-about">Close</button>
     </div>
 
     <!-- Settings Popup -->
@@ -128,7 +424,7 @@
       <h2>Settings PSFree</h2>
       <p>PS4 firmware supported:</p>
       <p>- 9.00</p>
-      <p>Choose you'r flavor :</p>
+      <p>Choose your flavor:</p>
       <label>
         <input type="radio" name="hen" value="GoldHEN" onchange="savejbflavor(); choosejb('GoldHEN')"> GoldHEN
       </label>
@@ -139,9 +435,8 @@
         <input type="checkbox" id="ckbaj" />
         <p id="agtext">Auto-Jailbreak</p>
       </label>
-      <button  onclick="closesettings()" class="close-btn" id="close-settings">Close</button>
+      <button onclick="closesettings()" class="close-btn" id="close-settings">Close</button>
     </div>
-
-    <script src='./js/index.js'></script>
+  <script src='./js/index.js'></script>
   </body>
 </html>
