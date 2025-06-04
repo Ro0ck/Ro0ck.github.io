@@ -3,6 +3,7 @@ CACHE MANIFEST
 # Generated on 2025-06-02 20:54:48.408840
 
 CACHE:
+/bos.jpg
 index.html
 css/index.css
 fonts/FONTS.LICENSE
@@ -73,6 +74,6 @@ psfree/module/rw.mjs
 psfree/module/utils.mjs
 psfree/module/view.mjs
 psfree/rop/900.mjs
-bos.jpg
+
 NETWORK:
 *
