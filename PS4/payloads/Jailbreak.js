@@ -1,5 +1,5 @@
 export function GoldHEN() {
-    fetch('./payloads/GoldHEN/goldhen.bin').then(res => {
+    fetch('./payloads/GoldHEN/GoldHEN.bin').then(res => {
         res.arrayBuffer().then(arr => {
             window.pld = new Uint32Array(arr);
             setTimeout(() => {
