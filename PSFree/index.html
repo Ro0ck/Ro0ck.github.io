@@ -18,126 +18,289 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 <html>
     <head>
         <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>PSFree-Lapse Exploit For PS4 9.00</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
         <style>
             @font-face {
                 font-family: 'logging';
                 src: url('fonts/LiberationMono-Regular.ttf');
             }
-            body {
-                background: #10131a;
-                color: #e0e0e0;
-                font-family: 'Segoe UI', 'Arial', 'sans-serif';
+
+            * {
                 margin: 0;
                 padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #000000;
+                color: #e4e4e7;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: center;
+                padding: 20px;
+                position: relative;
                 overflow-x: hidden;
             }
-            /* Animated cyberpunk grid background */
+
+            /* Black Ops 6 style background */
             body::before {
                 content: '';
                 position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: 
+                    /* Diagonal orange streaks */
+                    linear-gradient(135deg, transparent 40%, rgba(255, 140, 0, 0.03) 45%, transparent 50%),
+                    linear-gradient(135deg, transparent 60%, rgba(255, 140, 0, 0.02) 65%, transparent 70%),
+                    linear-gradient(135deg, transparent 20%, rgba(255, 100, 0, 0.02) 25%, transparent 30%),
+                    /* Hexagon grid pattern */
+                    radial-gradient(circle at 50% 50%, transparent 20px, rgba(255, 120, 0, 0.03) 21px, transparent 22px);
+                background-size: 100% 100%, 100% 100%, 100% 100%, 60px 60px;
                 z-index: 0;
-                background: repeating-linear-gradient(90deg, #222 0 2px, transparent 2px 80px),
-                            repeating-linear-gradient(0deg, #222 0 2px, transparent 2px 80px),
-                            linear-gradient(120deg, #00ffe7 0%, #ff6a00 100%);
-                opacity: 0.13;
-                animation: gridmove 8s linear infinite;
+                animation: pulse-bg 4s ease-in-out infinite;
             }
-            @keyframes gridmove {
-                0% { background-position: 0 0, 0 0, 0 0; }
-                100% { background-position: 80px 80px, 80px 80px, 0 0; }
-            }
-            h1, .title {
-                color: #00ffe7;
-                text-shadow: 0 0 16px #00ffe7, 0 0 32px #005a7a, 0 0 8px #ff6a00;
-                font-size: 2.5em;
-                margin-top: 48px;
-                margin-bottom: 18px;
-                letter-spacing: 3px;
-                font-family: 'Orbitron', 'Segoe UI', 'Arial', 'sans-serif';
-                position: relative;
-                z-index: 1;
-                animation: glowTitle 2.5s infinite alternate;
-            }
-            @keyframes glowTitle {
-                0% { text-shadow: 0 0 16px #00ffe7, 0 0 32px #005a7a, 0 0 8px #ff6a00; }
-                100% { text-shadow: 0 0 32px #00ffe7, 0 0 64px #005a7a, 0 0 16px #ff6a00; }
-            }
-            .bo6-logo {
-                display: none;
-            }
-            #runExploitBtn {
-                background: linear-gradient(90deg, #ff6a00 0%, #ffb347 100%);
-                color: #10131a;
-                border: none;
-                border-radius: 8px;
-                font-size: 1.2em;
-                font-weight: bold;
-                padding: 12px 32px;
-                margin-bottom: 24px;
-                margin-top: 12px;
-                box-shadow: 0 0 12px #ff6a00a0;
-                cursor: pointer;
-                transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-            }
-            #runExploitBtn:hover {
-                background: linear-gradient(90deg, #00ffe7 0%, #005a7a 100%);
-                color: #fff;
-                box-shadow: 0 0 18px #00ffe7a0;
-            }
-            #console {
-                font-family: 'logging', 'Consolas', 'monospace';
-                background: #181c24;
-                color: #00ffe7;
-                border-radius: 8px;
-                padding: 18px;
-                margin-top: 18px;
-                min-width: 320px;
-                min-height: 120px;
-                box-shadow: 0 0 8px #005a7a80;
-                font-size: 1.1em;
-            }
-            a {
-                color: #ffb347;
-                text-decoration: underline;
-            }
-            a:hover {
-                color: #00ffe7;
-            }
-            /* Neon border for main content */
-            .main-content {
-                background: rgba(16,19,26,0.85);
-                border-radius: 18px;
-                box-shadow: 0 0 32px #00ffe7a0, 0 0 16px #ff6a00a0;
-                border: 2.5px solid #ff6a00;
-                padding: 32px 36px 24px 36px;
-                margin-top: 36px;
-                margin-bottom: 36px;
-                position: relative;
-                z-index: 1;
-                max-width: 600px;
-            }
-            /* Add a cyberpunk scanline effect */
+
+            /* Orange glow effects */
             body::after {
                 content: '';
                 position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background:
+                    /* Top right corner glow */
+                    radial-gradient(ellipse at 100% 0%, rgba(255, 100, 0, 0.15) 0%, transparent 50%),
+                    /* Bottom left corner glow */
+                    radial-gradient(ellipse at 0% 100%, rgba(255, 80, 0, 0.1) 0%, transparent 40%),
+                    /* Center subtle glow */
+                    radial-gradient(ellipse at 50% 50%, rgba(255, 120, 0, 0.05) 0%, transparent 60%);
+                z-index: 0;
                 pointer-events: none;
-                z-index: 2;
-                background: repeating-linear-gradient(
-                    to bottom,
-                    rgba(0,255,231,0.03) 0px,
-                    rgba(0,255,231,0.01) 2px,
-                    transparent 4px,
-                    transparent 8px
-                );
-                mix-blend-mode: lighten;
+            }
+
+            @keyframes pulse-bg {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.7; }
+            }
+
+            /* Animated scan line */
+            .scanline {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, rgba(255, 120, 0, 0.6), transparent);
+                z-index: 0;
+                animation: scan 3s linear infinite;
+                box-shadow: 0 0 20px rgba(255, 120, 0, 0.5);
+            }
+
+            @keyframes scan {
+                0% { top: -10px; }
+                100% { top: 100%; }
+            }
+
+            .main-content {
+                background: rgba(15, 15, 15, 0.95);
+                border: 1px solid #ff7800;
+                border-radius: 8px;
+                padding: 40px 35px;
+                max-width: 450px;
+                width: 100%;
+                position: relative;
+                z-index: 1;
+                box-shadow: 0 0 30px rgba(255, 120, 0, 0.25);
+            }
+
+            .title {
+                font-size: 2rem;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 8px;
+                background: linear-gradient(135deg, #ff9500 0%, #ff6600 50%, #ff4400 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                text-shadow: 0 0 30px rgba(255, 120, 0, 0.5);
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #666;
+                font-size: 0.85rem;
+                margin-bottom: 32px;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+            }
+
+            #runExploitBtn {
+                width: 100%;
+                background: linear-gradient(135deg, #ff7800 0%, #ff5500 100%);
+                color: #000000;
+                border: none;
+                border-radius: 2px;
+                font-family: 'Inter', sans-serif;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 16px 32px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                box-shadow: 
+                    0 0 20px rgba(255, 120, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                position: relative;
+                overflow: hidden;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+            }
+
+            #runExploitBtn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                transition: left 0.4s;
+            }
+
+            #runExploitBtn:hover {
+                background: linear-gradient(135deg, #ff9000 0%, #ff6600 100%);
+                box-shadow: 
+                    0 0 30px rgba(255, 120, 0, 0.6),
+                    0 0 60px rgba(255, 100, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+
+            #runExploitBtn:hover::before {
+                left: 100%;
+            }
+
+            #runExploitBtn:focus {
+                outline: 2px solid #ff9500;
+                outline-offset: 3px;
+            }
+
+            #runExploitBtn:active {
+                transform: scale(0.98);
+            }
+
+            .console-container {
+                margin-top: 24px;
+            }
+
+            .console-header {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+
+            .console-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #ff7800;
+                box-shadow: 0 0 8px rgba(255, 120, 0, 0.6);
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+
+            .console-label {
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #666;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+
+            #console {
+                font-family: 'JetBrains Mono', 'logging', 'Consolas', monospace;
+                background: rgba(0, 0, 0, 0.8);
+                color: #ff9500;
+                border: 1px solid rgba(255, 120, 0, 0.2);
+                border-radius: 2px;
+                padding: 16px;
+                width: 100%;
+                min-height: 150px;
+                max-height: 300px;
+                font-size: 0.85rem;
+                line-height: 1.6;
+                overflow-x: hidden;
+                overflow-y: auto;
+                word-wrap: break-word;
+                word-break: break-word;
+                white-space: pre-wrap;
+                box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            #console::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            #console::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            #console::-webkit-scrollbar-thumb {
+                background: rgba(255, 120, 0, 0.3);
+                border-radius: 2px;
+            }
+
+            #console::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 120, 0, 0.5);
+            }
+
+            .footer-link {
+                margin-top: 24px;
+                text-align: center;
+                font-size: 0.8rem;
+            }
+
+            a {
+                color: #ff7800;
+                text-decoration: none;
+                transition: color 0.2s;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            a:hover {
+                color: #ff9500;
+                text-shadow: 0 0 10px rgba(255, 120, 0, 0.5);
+            }
+
+            /* Responsive */
+            @media (max-width: 480px) {
+                .main-content {
+                    padding: 32px 24px;
+                    border-radius: 20px;
+                }
+                
+                .title {
+                    font-size: 1.4rem;
+                }
+
+                #console {
+                    font-size: 0.8rem;
+                    min-height: 120px;
+                }
             }
         </style>
         <script>
@@ -148,19 +311,32 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </script>
     </head>
     <body>
-                <div class="main-content">
-                        <div class="title">PSFree: A PS4/PS5 Exploit Chain</div>
-                        <button id="runExploitBtn">Run Exploit</button>
-                        <div style="margin-bottom:18px;"></div>
-                        See <a href='./about.html' data-jslicense='1'>JavaScript license information</a> for the
-                        source code and license.<br>
-                        <pre id='console'></pre>
+        <div class="scanline"></div>
+        <div class="main-content">
+            <div class="title">PSFree</div>
+            <div class="subtitle">PS4/PS5 Exploit Chain</div>
+            
+            <button id="runExploitBtn" autofocus>▶ Run Exploit</button>
+            
+            <div class="console-container">
+                <div class="console-header">
+                    <div class="console-dot"></div>
+                    <span class="console-label">Console Output</span>
                 </div>
-                <script type='module'>
-                document.getElementById('runExploitBtn').addEventListener('click', async () => {
-                        // Dynamically import alert.mjs, which will load and run the exploit
-                        await import('./alert.mjs');
-                });
-                </script>
-        </body>
+                <pre id='console'></pre>
+            </div>
+        </div>
+        
+        <script type='module'>
+            // Focus on button when page loads
+            window.addEventListener('load', () => {
+                document.getElementById('runExploitBtn').focus();
+            });
+            
+            document.getElementById('runExploitBtn').addEventListener('click', async () => {
+                // Dynamically import alert.mjs, which will load and run the exploit
+                await import('./alert.mjs');
+            });
+        </script>
+    </body>
 </html>
